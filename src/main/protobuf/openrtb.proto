@@ -65,7 +65,7 @@ message BidRequest {
   // Auction type, where 1 = First Price, 2 = Second Price Plus.
   // Exchange-specific auction types can be defined using values > 500.
   // [AdX: 2]
-  AuctionType at = 7 [default = SECOND_PRICE];
+  AuctionType at = 7; // [default = SECOND_PRICE];
 
   // Maximum time in milliseconds to submit a bid to avoid timeout.
   // This value is commonly communicated offline.
@@ -85,7 +85,7 @@ message BidRequest {
   // road-blocking. 0 = no or unknown, 1 = yes, the impressions offered
   // represent all that are available.
   // [AdX: 0]
-  bool allimps = 10 [default = false];
+  bool allimps = 10; // [default = false];
 
   // Array of allowed currencies for bids on this bid request using ISO-4217
   // alpha codes. Recommended only if the exchange accepts multiple currencies.
@@ -109,7 +109,7 @@ message BidRequest {
   // Indicator of test mode in which auctions are not billable,
   // where 0 = live mode, 1 = test mode.
   // [AdX: BidRequest.is_test]
-  bool test = 15 [default = false];
+  bool test = 15; // [default = false];
 
   // Extensions.
   extensions 100 to 9999;
@@ -169,12 +169,12 @@ message BidRequest {
     // Minimum bid for this impression expressed in CPM.
     // [AdX: min(BidRequest.AdSlot.matching_ad_data.minimum_cpm_micros) *
     //       1,000,000]
-    double bidfloor = 8 [default = 0];
+    double bidfloor = 8; // [default = 0];
 
     // Currency specified using ISO-4217 alpha codes. This may be different
     // from bid currency returned by bidder if this is allowed by the exchange.
     // [AdX: A single currency, obtained from the included billing_id]
-    string bidfloorcur = 9 [default = "USD"];
+    string bidfloorcur = 9; // [default = "USD"];
 
     // Indicates the type of browser opened upon clicking the
     // creative in an app, where 0 = embedded, 1 = native.
@@ -408,7 +408,7 @@ message BidRequest {
       // If multiple ad impressions are offered in the same bid request,
       // the sequence number will allow for the coordinated delivery of
       // multiple creatives.
-      int32 sequence = 9 [default = 1];
+      int32 sequence = 9; // [default = 1];
 
       // Blocked creative attributes.
       // [AdX: BidRequest.AdSlot.excluded_attribute]
@@ -429,7 +429,7 @@ message BidRequest {
 
       // Indicates if letter-boxing of 4:3 content into a 16:9 window is
       // allowed, where 0 = no, 1 = yes.
-      bool boxingallowed = 14 [default = true];
+      bool boxingallowed = 14; // [default = true];
 
       // Playback methods that may be in use. If none are specified, any
       // method may be used. Only one method is typically used in practice.
@@ -513,7 +513,7 @@ message BidRequest {
       // If multiple ad impressions are offered in the same bid request,
       // the sequence number will allow for the coordinated delivery of
       // multiple creatives.
-      int32 sequence = 6 [default = 1];
+      int32 sequence = 6; // [default = 1];
 
       // Blocked creative attributes.
       repeated CreativeAttribute battr = 7 [packed = true];
@@ -624,7 +624,7 @@ message BidRequest {
       // Indicator of auction eligibility to seats named in the Direct Deals
       // object, where 0 = all bids are accepted, 1 = bids are restricted to
       // the deals specified and the terms thereof.
-      bool private_auction = 1 [default = false];
+      bool private_auction = 1; // [default = false];
 
       // Array of Deal (Section 3.2.18) objects that convey the specific deals
       // applicable to this impression.
@@ -647,13 +647,13 @@ message BidRequest {
         // Minimum bid for this impression expressed in CPM.
         // [AdX: BidRequest.AdSlot.MatchingAdData.DirectDeal.fixed_cpm_micros *
         //       1,000,000]
-        double bidfloor = 2 [default = 0];
+        double bidfloor = 2; // [default = 0];
 
         // Currency specified using ISO-4217 alpha codes. This may be different
         // from bid currency returned by bidder if this is allowed
         // by the exchange.
         // [AdX: A single currency, obtained from the included billing_id]
-        string bidfloorcur = 3 [default = "USD"];
+        string bidfloorcur = 3; // [default = "USD"];
 
         // Whitelist of buyer seats (e.g., advertisers, agencies) allowed to
         // bid on this deal. IDs of seats and knowledge of the buyer's
@@ -1347,7 +1347,7 @@ message BidResponse {
 
     // 0 = impressions can be won individually; 1 = impressions must be won or
     // lost as a group.
-    bool group = 3 [default = false];
+    bool group = 3; // [default = false];
 
     // Extensions.
     extensions 100 to 9999;
@@ -1496,14 +1496,14 @@ message NativeRequest {
   PlacementType plcmttype = 9;
 
   // The number of identical placements in this Layout.
-  int32 plcmtcnt = 4 [default = 1];
+  int32 plcmtcnt = 4; // [default = 1];
 
   // 0 for the first ad, 1 for the second ad, and so on. Note this would
   // generally NOT be used in combination with plcmtcnt - either you are
   // auctioning multiple identical placements (in which case
   // plcmtcnt>1, seq=0) or you are holding separate auctions for distinct
   // items in the feed (in which case plcmtcnt=1, seq>=1).
-  int32 seq = 5 [default = 0];
+  int32 seq = 5; // [default = 0];
 
   // Any bid must comply with the array of elements expressed by the Exchange.
   // REQUIRED by the OpenRTB Native specification: at least 1 element.
@@ -1531,7 +1531,7 @@ message NativeRequest {
     // Set to true if asset is required
     // (exchange will not accept a bid without it).
     // [AdX: BidRequest.AdSlot.native_ad_template[0].required_fields]
-    bool required = 2 [default = false];
+    bool required = 2; // [default = false];
 
     // RECOMMENDED by the OpenRTB Native specification.
     oneof asset_oneof {
@@ -1716,7 +1716,7 @@ message NativeResponse {
     required int32 id = 1;
 
     // Set to 1 if asset is required. (bidder requires it to be displayed).
-    bool required = 2 [default = false];
+    bool required = 2; // [default = false];
 
     // RECOMMENDED by the OpenRTB Native specification.
     oneof asset_oneof {
@@ -2236,6 +2236,8 @@ enum ContentCategory {
 }
 
 enum AuctionType {
+  UNKNOWN_AUCTION_TYPE = 0; // for proto3
+
   FIRST_PRICE = 1;
 
   // [AdX: DealType.PRIVATE_AUCTION]
@@ -2248,6 +2250,8 @@ enum AuctionType {
 // OpenRTB 2.0: types of ads that can be accepted by the exchange unless
 // restricted by publisher site settings.
 enum BannerAdType {
+  UNKNOWN_BANNERAD_TYPE = 0; // for proto3
+
   // "Usually mobile".
   XHTML_TEXT_AD = 1;
   // "Usually mobile".
@@ -2262,6 +2266,8 @@ enum BannerAdType {
 // attributes that can describe an ad being served or serve as restrictions
 // of thereof.
 enum CreativeAttribute {
+  UNKNOWN_CREATIVE_ATTRIBUTE = 0; // for proto3
+
   AUDIO_AUTO_PLAY = 1;
   AUDIO_USER_INITIATED = 2;
   EXPANDABLE_AUTOMATIC = 3;
@@ -2300,6 +2306,8 @@ enum CreativeAttribute {
 // safe interpretation of value "3" is MRAID-1. In OpenRTB 2.2, this was
 // made explicit and MRAID-2 has been added as value "5".
 enum APIFramework {
+  UNKNOWN_API_FRAMEWORK = 0; // for proto3
+
   // [AdX: attribute 30/VPAID]
   VPAID_1 = 1;
 
@@ -2367,6 +2375,8 @@ enum AdPosition {
 // Guidelines (QAG). Practitioners should keep in sync with updates to the
 // QAG values as published on IAB.net.
 enum VideoLinearity {
+  UNKNOWN_VIDEO_LINEARITY = 0; // for proto3
+
   LINEAR = 1;      // Linear/In-stream
   NON_LINEAR = 2;  // Non-linear/Overlay
 }
@@ -2374,6 +2384,8 @@ enum VideoLinearity {
 // OpenRTB 2.0: The following table lists the options for the various
 // bid response protocols that could be supported by an exchange.
 enum Protocol {
+  UNKNOWN_PROTOCOL = 0; // for proto3
+
   VAST_1_0 = 1;
   VAST_2_0 = 2;
   VAST_3_0 = 3;
@@ -2388,6 +2400,8 @@ enum Protocol {
 
 // OpenRTB 2.0: The following table lists the various playback methods.
 enum PlaybackMethod {
+  UNKNOWN_PLAYBACK_METHOD = 0; // for proto3
+
   // [AdX: VideoPlaybackMethod.AUTO_PLAY_SOUND_ON]
   AUTO_PLAY_SOUND_ON = 1;
 
@@ -2425,6 +2439,8 @@ enum ConnectionType {
 // expandable ad may expand, given the positioning of the ad unit on the
 // page and constraints imposed by the content.
 enum ExpandableDirection {
+  UNKNOWN_EXPANDABLE_DIRECTION = 0; // for proto3
+
   // [AdX: attribute 15/EXPANDING_LEFT, also 17,19,26,27/EXPANDING_*LEFT*]
   LEFT = 1;
 
@@ -2443,6 +2459,8 @@ enum ExpandableDirection {
 // OpenRTB 2.0: The following table lists the various options for the
 // delivery of video content.
 enum ContentDeliveryMethod {
+  UNKNOWN_CONTENT_DELIVERY_METHOD = 0; // for proto3
+
   STREAMING = 1;
   PROGRESSIVE = 2;
 }
@@ -2454,6 +2472,8 @@ enum ContentDeliveryMethod {
 // Guidelines (QAG). Practitioners should keep in sync with updates to the
 // QAG values as published on IAB.net.
 enum ContentContext {
+  UNKNOWN_CONTENT_CONTEXT = 0; // for proto3
+
   VIDEO = 1;
   GAME = 2;
   MUSIC = 3;
@@ -2476,6 +2496,8 @@ enum ProductionQuality {
 // OpenRTB 2.0: The following table lists the options to indicate how the
 // geographic information was determined.
 enum LocationType {
+  UNKNOWN_LOCATION_TYPE = 0; // for proto3
+
   GPS_LOCATION = 1;
   IP = 2;
   USER_PROVIDED = 3;
@@ -2484,6 +2506,8 @@ enum LocationType {
 // OpenRTB 2.4: The following table lists the services and/or vendors used for
 // resolving IP addresses to geolocations.
 enum LocationService {
+  UNKNOWN_LOCATION_SERVICE = 0; // for proto3
+
   IP2LOCATION = 1;
   NEUSTAR = 2;
   MAXMIND = 3;
@@ -2501,6 +2525,8 @@ enum LocationService {
 // Guidelines (QAG). Practitioners should keep in sync with updates to the
 // QAG values as published on IAB.net.
 enum DeviceType {
+  UNKNOWN_DEVICE_TYPE = 0; // for proto3
+
   // Mobile (OpenRTB 2.2+: obsolete, alias for PHONE or TABLET).
   MOBILE = 1;
 
@@ -2533,6 +2559,8 @@ enum DeviceType {
 // video quality. These values are defined by the IAB -
 // http://www.iab.net/media/file/long-form-video-final.pdf.
 enum CompanionType {
+  UNKNOWN_COMPANION_TYPE = 0; // for proto3
+
   // [AdX: CreativeFormat.IMAGE_CREATIVE]
   STATIC = 1;
 
@@ -2546,6 +2574,8 @@ enum CompanionType {
 // describing content based on the QAG categorization.
 // Refer to http://www.iab.net/ne_guidelines for more information.
 enum QAGMediaRating {
+  UNKNOWN_QAG_MEDIA_RATING = 0; // for proto3
+
   ALL_AUDIENCES = 1;
   EVERYONE_OVER_12 = 2;
   MATURE = 3;
@@ -2568,6 +2598,8 @@ enum NoBidReason {
 // OpenRTB 2.4: The following table lists the types of feeds,
 // typically for audio.
 enum FeedType {
+  UNKNOWN_FEED_TYPE = 0; // for proto3
+
   MUSIC_SERVICE = 1;
   BROADCAST = 2;
   PODCAST = 3;
@@ -2589,6 +2621,8 @@ enum VolumeNormalizationMode {
 // support all asset variants or introduce new ones unique to that system.
 // To be deprecated.
 enum LayoutId {
+  UNKNOWN_LAYOUT_ID = 0; // for proto3
+
   CONTENT_WALL = 1;
   APP_WALL = 2;
   NEWS_FEED = 3;
@@ -2607,6 +2641,8 @@ enum LayoutId {
 // new ones unique to that system.
 // To be deprecated.
 enum AdUnitId {
+  UNKNOWN_AD_UNIT_ID = 0; // for proto3
+
   PAID_SEARCH_UNIT = 1;
   RECOMMENDATION_WIDGET = 2;
   PROMOTED_LISTING = 3;
@@ -2622,6 +2658,8 @@ enum AdUnitId {
 // may not exist on the page - for example it's expected that most
 // content platforms have some social components, etc.
 enum ContextType {
+  UNKNOWN_CONTEXT_TYPE = 0; // for proto3
+
   // Content-centric context such as newsfeed, article, image gallery,
   // video gallery, or similar.
   CONTENT = 1;
@@ -2640,6 +2678,8 @@ enum ContextType {
 // combined with the primary context type as indicated (ie for a context
 // type of 1, only context subtypes that start with 1 are valid).
 enum ContextSubtype {
+  UNKNOWN_CONTEXT_SUBTYPE = 0; // for proto3
+
   CONTENT_GENERAL_OR_MIXED = 10;
   CONTENT_ARTICLE = 11;
   CONTENT_VIDEO = 12;
@@ -2659,6 +2699,8 @@ enum ContextSubtype {
 // OpenRTB Native 1.1: The FORMAT of the ad you are purchasing,
 // separate from the surrounding context.
 enum PlacementType {
+  UNKNOWN_PLACEMENT_TYPE = 0; // for proto3
+
   // In the feed of content - for example as an item inside the organic
   // feed/grid/listing/carousel.
   IN_FEED = 1;
@@ -2678,6 +2720,8 @@ enum PlacementType {
 // and sellers as the format evolves. An implementing exchange may not
 // support all asset variants or introduce new ones unique to that system.
 enum DataAssetType {
+  UNKNOWN_DATA_ASSET_TYPE = 0; // for proto3
+
   // Sponsored By message where response should contain the brand name
   // of the sponsor.
   // Format: Text; Max length: 25 or longer.
@@ -2745,6 +2789,8 @@ enum DataAssetType {
 // at the time of writing this spec. This list is non-exhaustive and intended
 // to be extended by the buyers and sellers as the format evolves.
 enum ImageAssetType {
+  UNKNOWN_IMAGE_ASSET_TYPE = 0; // for proto3
+
   // Icon image.
   // Max height: at least 50; Aspect ratio: 1:1.
   // [AdX: Fields.APP_ICON]
