@@ -29,7 +29,7 @@ message BidRequest {
   // Unique ID of the bid request, provided by the exchange.
   // REQUIRED by the OpenRTB specification.
   // [AdX: BidRequest.id - AdX is binary, OpenRTB is base64 (no padding)]
-  required string id = 1;
+  string id = 1;
 
   // Array of Imp objects (Section 3.2.2) representing the impressions offered.
   // At least 1 Imp object is required.
@@ -130,7 +130,7 @@ message BidRequest {
     // request (typically, value starts with 1, and increments up to n
     // for n impressions).
     // [AdX: BidRequest.AdSlot.id]
-    required string id = 1;
+    string id = 1;
 
     // A Banner object (Section 3.2.3); required if this impression is
     // offered as a banner ad opportunity.
@@ -642,7 +642,7 @@ message BidRequest {
         // A unique identifier for the direct deal.
         // REQUIRED by the OpenRTB specification.
         // [AdX: BidRequest.AdSlot.MatchingAdData.DirectDeal.direct_deal_id]
-        required string id = 1;
+        string id = 1;
 
         // Minimum bid for this impression expressed in CPM.
         // [AdX: BidRequest.AdSlot.MatchingAdData.DirectDeal.fixed_cpm_micros *
@@ -1305,7 +1305,7 @@ message BidResponse {
   // ID of the bid request to which this is a response.
   // REQUIRED by the OpenRTB specification.
   // [AdX: Not mapped to any field, but validated against the BidRequest.id]
-  required string id = 1;
+  string id = 1;
 
   // Array of seatbid objects; 1+ required if a bid is to be made.
   // [AdX: BidResponse.Ad]
@@ -1359,12 +1359,12 @@ message BidResponse {
     message Bid {
       // Bidder generated bid ID to assist with logging/tracking.
       // REQUIRED by the OpenRTB specification.
-      required string id = 1;
+      string id = 1;
 
       // ID of the Imp object in the related bid request.
       // REQUIRED by the OpenRTB specification.
       // [AdX: BidResponse.Ad.AdSlot.id]
-      required string impid = 2;
+      string impid = 2;
 
       // Bid price expressed as CPM although the actual transaction is for a
       // unit impression only. Note that while the type indicates float, integer
@@ -1372,7 +1372,7 @@ message BidResponse {
       // (e.g., BigDecimal in Java).
       // REQUIRED by the OpenRTB specification.
       // [AdX: BidResponse.Ad.AdSlot.max_cpm_micros * 1,000,000]
-      required double price = 3;
+      double price = 3;
 
       // ID of a preloaded ad to be served if the bid wins.
       string adid = 4;
@@ -1526,7 +1526,7 @@ message NativeRequest {
     // REQUIRED by the OpenRTB Native specification.
     // [AdX: 1..N for N assets in unspecified order, corresponding to recommended
     //       or required fields in the first NativeAdTemplate.]
-    required int32 id = 1;
+    int32 id = 1;
 
     // Set to true if asset is required
     // (exchange will not accept a bid without it).
@@ -1566,7 +1566,7 @@ message NativeRequest {
       // RECOMMENDED that the value be either of: 25, 90, 140.
       // REQUIRED by the OpenRTB Native specification.
       // [AdX: BidRequest.AdSlot.native_ad_template[0].headline_max_safe_length]
-      required int32 len = 1;
+      int32 len = 1;
 
       // Extensions.
       // extensions 100 to 9999;
@@ -1628,7 +1628,7 @@ message NativeRequest {
       // display this information in an appropriate format.
       // REQUIRED by the OpenRTB Native specification.
       // [AdX: BidRequest.AdSlot.native_ad_template[0] field type]
-      required DataAssetType type = 1;
+      DataAssetType type = 1;
 
       // Maximum length of the text in the element's response.
       // Longer strings will be truncated by the publisher during rendering.
@@ -1662,7 +1662,7 @@ message NativeResponse {
   // Destination Link.
   // REQUIRED by the OpenRTB Native specification.
   // [AdX: BidResponse.Ad.native_ad[0]]
-  required Link link = 3;
+  Link link = 3;
 
   // Array of impression tracking URLs, expected to return a 1x1 image or
   // 204 response - typically only passed when using 3rd party trackers.
@@ -1713,7 +1713,7 @@ message NativeResponse {
     // Unique asset ID, assigned by exchange, must match one of the asset IDs
     // in request.
     // REQUIRED by the OpenRTB Native specification.
-    required int32 id = 1;
+    int32 id = 1;
 
     // Set to 1 if asset is required. (bidder requires it to be displayed).
     bool required = 2; // [default = false];
@@ -1752,7 +1752,7 @@ message NativeResponse {
       // The text associated with the text element.
       // REQUIRED by the OpenRTB Native specification.
       // [AdX: BidResponse.Ad.native_ad[0].headline]
-      required string text = 1;
+      string text = 1;
 
       // Extensions.
       // extensions 100 to 9999;
@@ -1770,7 +1770,7 @@ message NativeResponse {
       //       MAIN/IMAGE: image.url
       //       ICON/APP_ICON: app_icon.url
       //       LOGO/LOGO: logo.url]
-      required string url = 1;
+      string url = 1;
 
       // Width of the image in pixels.
       // RECOMMENDED by the OpenRTB Native specification.
@@ -1811,7 +1811,7 @@ message NativeResponse {
       //       PRICE/PRICE: price
       //       RATING/STAR_RATING: star_rating (AdX requires a double 0..5)
       //     - Note: ADDRESS/STORE not mapped via data.value, use asset.link.url]
-      required string value = 2;
+      string value = 2;
 
       // Extensions.
       // extensions 100 to 9999;
@@ -1822,7 +1822,7 @@ message NativeResponse {
     message Video {
       // VAST xml.
       // REQUIRED by the OpenRTB Native specification.
-      required string vasttag = 1;
+      string vasttag = 1;
 
       // Extensions.
       // extensions 100 to 9999;
