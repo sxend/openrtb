@@ -1,4 +1,4 @@
-Google OpenRTB Libraries
+Google OpenRTB message definition at protobuf3 format with scalapb
 ----------------------------------------------------------------------
 
 This library supports the OpenRTB specification, providing
